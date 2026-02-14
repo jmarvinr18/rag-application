@@ -7,5 +7,4 @@ class LLMModel:
 
 
     def get(self):
-        print("THIS IS THE MODEL")
         return self.llm

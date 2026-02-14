@@ -9,3 +9,4 @@ ipykernel
 streamlit
 langchain-ollama
 flask-smorest
+flask-marshmallow
