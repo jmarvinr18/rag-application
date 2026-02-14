@@ -10,3 +10,6 @@ streamlit
 langchain-ollama
 flask-smorest
 flask-marshmallow
+sqlalchemy
+flask-sqlalchemy
+psycopg2-binary

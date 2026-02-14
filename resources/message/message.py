@@ -5,8 +5,12 @@ from flask_smorest import Blueprint, abort
 from services.LLM import LLMModel
 from services.Prompt import Prompt
 from langchain_core.output_parsers import StrOutputParser
-from schema.message import MessageSchema
 
+from sqlalchemy.exc import SQLAlchemyError
+
+from db import db
+from schema.message import MessageSchema
+from models import MessageModel
 blp = Blueprint("message", __name__, description="Operations on message")
 
 
@@ -22,18 +26,34 @@ class Message(MethodView):
 
 @blp.route("/message")
 class MessageList(MethodView):
+
+    @blp.response(200, MessageSchema(many=True))
     def get(self):
-        pass
+
+        return MessageModel.query.all()
 
     @blp.arguments(MessageSchema)
+    @blp.response(201, MessageSchema)
     def post(self, message_data):
 
-        llm = LLMModel().get()
-        prompt = Prompt().get()
-        output_parser = StrOutputParser()    
+        # llm = LLMModel().get()
+        # prompt = Prompt().get()
+        # output_parser = StrOutputParser()    
 
-        chain = prompt|llm|output_parser
+        # chain = prompt|llm|output_parser
 
-        input_text = message_data["message"]
+        # input_text = message_data["message"]
 
-        return {"response": chain.invoke({"question": input_text})}
+        message = MessageModel(**message_data)
+
+        try:
+            db.session.add(message)
+            db.session.commit()
+
+        except SQLAlchemyError:
+            abort(500, message="An error occured while inserting the item.")
+
+
+        # return {"response": chain.invoke({"question": input_text})}
+
+        return message
