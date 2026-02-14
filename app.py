@@ -24,6 +24,7 @@ output_parser = StrOutputParser()
 chain = prompt|llm|output_parser
 
 input_text = "What question you have in mind?"
+
 print(chain.invoke({"question": input_text}))
 
 
