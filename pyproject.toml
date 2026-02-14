@@ -1,0 +1,16 @@
+[project]
+name = "rag-poc"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.2",
+    "ipykernel>=7.2.0",
+    "langchain>=1.2.9",
+    "langchain-community>=0.4.1",
+    "langchain-google-genai>=4.2.0",
+    "langchain-groq>=1.1.2",
+    "langchain-openai>=1.1.8",
+    "python-dotenv>=1.2.1",
+]
