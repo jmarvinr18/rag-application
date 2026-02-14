@@ -27,7 +27,6 @@ input_text = "What question you have in mind?"
 
 print(chain.invoke({"question": input_text}))
 
-
 api = Api(app)
 
 api.register_blueprint(MessageBlueprint)
