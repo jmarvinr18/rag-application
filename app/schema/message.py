@@ -5,4 +5,4 @@ class MessageSchema(Schema):
     conversation_id = fields.Str(required=True)
     content = fields.Str(required=True)
     role = fields.Str(required=True)
-    created_at = fields.DateTime(format=str)
+    created_at = fields.DateTime()

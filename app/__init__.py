@@ -4,7 +4,7 @@ from flask import Flask
 from flask_smorest import Api
 
 
-from app.routes import MessageBlueprint, ConversationBlueprint
+from app.routes import api
 from app.database import db
 from app.models import Message,Document
 
@@ -25,7 +25,7 @@ def create_app(db_url=None):
     app.config["API_TITLE"] = "RAG POC"
     app.config["API_VERSION"] = "v1"
     app.config["OPENAPI_VERSION"] = "3.0.3"
-    app.config["OPENAPI_URL_PREFIX"] = "/"
+    app.config["OPENAPI_URL_PREFIX"] = ""
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
@@ -39,8 +39,7 @@ def create_app(db_url=None):
         db.create_all()
 
 
-    api = Api(app)
-    api.register_blueprint(MessageBlueprint)
-    api.register_blueprint(ConversationBlueprint)
+    api_endpoints = Api(app)
+    api_endpoints.register_blueprint(api)
 
     return app

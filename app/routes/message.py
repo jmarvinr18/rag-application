@@ -7,12 +7,18 @@ from app.schema.message import MessageSchema
 from app.models import Message as MessageModel
 
 from app.services.Message import AIMessage
+from app.routes import api
 
 
-blp = Blueprint("message", __name__, description="Operations on message")
 
+blp = Blueprint(
+    "messages",
+    __name__,
+    url_prefix="/messages",
+    description="Message operations"
+)
 
-@blp.route("/message/<string:message_id>")
+@blp.route("/<string:message_id>")
 class Message(MethodView):
 
     def get (self, message_id):
@@ -22,7 +28,7 @@ class Message(MethodView):
     def delete(self):
         pass
 
-@blp.route("/message")
+@blp.route("")
 class MessageList(MethodView):
 
     @blp.response(200, MessageSchema(many=True))

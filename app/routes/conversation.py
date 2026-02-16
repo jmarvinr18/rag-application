@@ -1,17 +1,23 @@
 import uuid
 from flask import request
 from flask.views import MethodView
-from flask_smorest import Blueprint, abort
+from flask_smorest import Blueprint,abort
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.database.db import db
 from app.schema.conversation import ConversationSchema
 from app.models import Conversation
+from app.routes import api
 
-blp = Blueprint("conversation", __name__, description="Operations on conversation")
 
+blp = Blueprint(
+    "conversation",
+    __name__,
+    url_prefix="/conversations",
+    description="Message operations"
+)
 
-@blp.route("/conversation/<string:conversation_id>")
+@blp.route("/<string:conversation_id>")
 class Convesation(MethodView):
 
     def get (self, conversation_id):
@@ -21,7 +27,7 @@ class Convesation(MethodView):
     def delete(self):
         pass
 
-@blp.route("/conversation")
+@blp.route("")
 class ConvesationList(MethodView):
 
     @blp.response(200, ConversationSchema(many=True))
