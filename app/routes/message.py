@@ -1,0 +1,73 @@
+from flask import request
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from sqlalchemy.exc import SQLAlchemyError
+from app.database.db import db
+from app.schema.message import MessageSchema
+from app.models import Message as MessageModel
+
+from app.services.Message import AIMessage
+
+
+blp = Blueprint("message", __name__, description="Operations on message")
+
+
+@blp.route("/message/<string:message_id>")
+class Message(MethodView):
+
+    def get (self, message_id):
+        return {"message": f"Welcome to RAG POC message {message_id}", "status": 200}
+
+
+    def delete(self):
+        pass
+
+@blp.route("/message")
+class MessageList(MethodView):
+
+    @blp.response(200, MessageSchema(many=True))
+    def get(self):
+
+        return MessageModel.query.all()
+
+    @blp.arguments(MessageSchema)
+    # @blp.response(201, MessageSchema)
+    def post(self, message_data):
+
+
+        # message_data = request.get_json()
+        input_text = message_data["content"]
+
+        
+        try:
+            # 1️⃣ save USER message first
+            user_message = MessageModel(**message_data)
+            db.session.add(user_message)
+
+            # 2️⃣ generate AI response
+            ai_text = AIMessage().get(input_text)
+
+            ai_message_data = {
+                "content": ai_text,
+                "conversation_id": message_data["conversation_id"],
+                "role": "ai"
+            }
+
+            ai_message = MessageModel(**ai_message_data)
+            db.session.add(ai_message)
+
+            # 3️⃣ commit once (atomic)
+            db.session.commit()
+
+            return {
+                "user": message_data,
+                "ai": ai_message_data
+            }, 201
+
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            abort(500, message=str(e))
+
+
+
+        return {"user": message_data, "ai": ai_message_data}

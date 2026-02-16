@@ -12,4 +12,7 @@ flask-smorest
 flask-marshmallow
 sqlalchemy
 flask-sqlalchemy
-psycopg2-binary
+psycopg2-binary 
+pgvector 
+sqlalchemy-utils
+shortuuid
