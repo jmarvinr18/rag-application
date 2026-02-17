@@ -38,6 +38,11 @@ def create_app(db_url=None):
         db.session.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))        
         db.create_all()
 
+    from app.services.LLM import ChatGroqModel
+    app.ai_service = ChatGroqModel()  # model is loaded once
+
+    
+
 
     api_endpoints = Api(app)
     api_endpoints.register_blueprint(api)

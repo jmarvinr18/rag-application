@@ -11,7 +11,9 @@ class PromptTemplate:
         prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", system_prompt),
-                MessagesPlaceholder("messages")
+                MessagesPlaceholder("chat_history"),
+                ("human", "{input}"),
+
             ]
         )
         return prompt

@@ -16,3 +16,4 @@ psycopg2-binary
 pgvector 
 sqlalchemy-utils
 shortuuid
+transformers

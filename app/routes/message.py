@@ -6,7 +6,7 @@ from app.database.db import db
 from app.schema.message import MessageSchema
 from app.models import Message as MessageModel
 
-from app.services.Message import AIMessage
+from app.services.Message import AIMessageService
 from app.routes import api
 
 
@@ -43,26 +43,27 @@ class MessageList(MethodView):
 
         # message_data = request.get_json()
         input_text = message_data["content"]
+        session_id = message_data["conversation_id"]
 
         
         try:
-            # 1️⃣ save USER message first
+            # save USER message first
             user_message = MessageModel(**message_data)
             db.session.add(user_message)
 
-            # 2️⃣ generate AI response
-            ai_text = AIMessage().get(input_text)
+            # generate AI response
+            ai_text = AIMessageService().invokeWithHistory(session_id, input_text)
 
             ai_message_data = {
                 "content": ai_text,
-                "conversation_id": message_data["conversation_id"],
+                "conversation_id": session_id,
                 "role": "ai"
             }
 
             ai_message = MessageModel(**ai_message_data)
             db.session.add(ai_message)
 
-            # 3️⃣ commit once (atomic)
+            # commit once (atomic)
             db.session.commit()
 
             return {

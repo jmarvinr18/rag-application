@@ -1,1 +1,1 @@
-from .ai_message import AIMessage
+from .ai_message import AIMessageService
