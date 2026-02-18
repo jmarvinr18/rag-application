@@ -11,8 +11,7 @@ from app.database import db
 
 class AIMessageService:
     def __init__(self):
-
-        self.store = {}
+        pass
 
 
     def getSessionHistory(self, conversation_id: str="") -> BaseChatMessageHistory:
@@ -35,11 +34,12 @@ class AIMessageService:
 
         prompt = PromptTemplate().get()
         output_parser = StrOutputParser()
-        config = {"configurable": {"session_id": conversation_id}}
+        
 
         chain = prompt|model|output_parser
 
-
+        config = {"configurable": {"session_id": conversation_id}}
+        
         with_message_history = RunnableWithMessageHistory(
             chain,
             self.getSessionHistory,

@@ -2,24 +2,24 @@ import os
 
 from flask import Flask
 from flask_smorest import Api
-
-
+from app.config import Config
+from app.extensions.redis_client import init_redis
+from sqlalchemy import text
 from app.routes import api
 from app.database import db
-from app.models import Message,Document
+from app.services.LLM import ChatGroqModel
+
 
 
 
 def create_app(db_url=None):
 
     app = Flask(__name__)
+    app.config.from_object(Config)
 
+    # init redis
+    init_redis(app)
 
-    DB_USER = os.getenv("DB_USER")
-    DB_PASSWORD = os.getenv("DB_PASSWORD")
-    DB_HOST = os.getenv("DB_HOST")
-    DB_PORT = os.getenv("DB_PORT")
-    DB_NAME = os.getenv("DB_NAME")
 
     app.config["PROPAGATE_EXCEPTIONIS"] = True
     app.config["API_TITLE"] = "RAG POC"
@@ -34,15 +34,11 @@ def create_app(db_url=None):
     db.init_app(app)
 
     with app.app_context():
-        from sqlalchemy import text
         db.session.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))        
         db.create_all()
 
-    from app.services.LLM import ChatGroqModel
-    app.ai_service = ChatGroqModel()  # model is loaded once
-
     
-
+    app.ai_service = ChatGroqModel()  # model is loaded once
 
     api_endpoints = Api(app)
     api_endpoints.register_blueprint(api)
