@@ -18,7 +18,7 @@ blp = Blueprint(
 )
 
 @blp.route("/<string:conversation_id>")
-class Convesation(MethodView):
+class Conversation(MethodView):
 
     def get (self, conversation_id):
         return {"message": f"Welcome to RAG POC conversation {conversation_id}", "status": 200}
@@ -28,7 +28,7 @@ class Convesation(MethodView):
         pass
 
 @blp.route("")
-class ConvesationList(MethodView):
+class ConversationList(MethodView):
 
     @blp.response(200, ConversationSchema(many=True))
     def get(self):

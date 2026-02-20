@@ -5,4 +5,4 @@ class DocumentSchema(Schema):
     title = fields.Str(required=True)
     source = fields.Str(required=True)
     doc_type = fields.Str(required=True)
-    created_at = fields.DateTime(format=str)
+    created_at = fields.DateTime()

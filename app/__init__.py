@@ -31,6 +31,14 @@ def create_app(db_url=None):
 
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    UPLOAD_FOLDER = "uploads"
+
+    app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
+    app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
     db.init_app(app)
 
     with app.app_context():

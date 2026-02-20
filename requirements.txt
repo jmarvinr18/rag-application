@@ -18,3 +18,9 @@ sqlalchemy-utils
 shortuuid
 redis 
 flask-caching
+langchain_huggingface
+sentence_transformers
+chromadb
+langchain_chroma
+pypdf
+langchain_postgres
