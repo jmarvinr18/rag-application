@@ -8,10 +8,9 @@ from sqlalchemy import text
 from app.routes import api
 from app.database import db
 from app.services.LLM import ChatGroqModel
+from flask_migrate import Migrate
 
-
-
-
+migrate = Migrate()
 def create_app(db_url=None):
 
     app = Flask(__name__)
@@ -40,6 +39,7 @@ def create_app(db_url=None):
 
 
     db.init_app(app)
+    migrate.init_app(app=app, db=db)
 
     with app.app_context():
         db.session.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))        

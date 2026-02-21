@@ -8,6 +8,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 from flask import current_app
 from app.models import Message
 from app.database import db
+from langchain.chains import StuffDocumentsChain
 
 class AIMessageService:
     def __init__(self):

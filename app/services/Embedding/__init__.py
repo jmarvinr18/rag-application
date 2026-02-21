@@ -1,0 +1,1 @@
+from .process_document import process_document_embedding

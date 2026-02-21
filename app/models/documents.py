@@ -8,6 +8,8 @@ class Document(db.Model):
     id = db.Column(db.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = db.Column(db.Text)
     source = db.Column(db.Text)
+    file_path = db.Column(db.String)
+    status = db.Column(db.String)
     doc_type = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 

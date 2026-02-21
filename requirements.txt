@@ -24,3 +24,5 @@ chromadb
 langchain_chroma
 pypdf
 langchain_postgres
+rq
+Flask-Migrate
