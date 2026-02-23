@@ -13,19 +13,20 @@ This project demonstrates a Flask application integrated with RQ for background 
 
 ## Setup Instructions
 
-1. Run Flask:
+### 1. Run Flask:
 
 ```bash
 flask run --port 5001
-
-
-2. Run Redis and PostgreSQL containers:
+```
+### 2. Run Redis and PostgreSQL containers:
 
 ```bash
 docker compose up -d
+```
 
-3. Set Python path and run the RQ worker:
+### 3. Set Python path and run the RQ worker:
 
 ```bash
 export PYTHONPATH=.
 python app/worker.py
+```
