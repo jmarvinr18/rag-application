@@ -10,7 +10,9 @@ api = Blueprint(
 from .message import blp as MessageBlueprint
 from .conversation import blp as ConversationBlueprint
 from .document import blp as DocumentBlueprint
+from .document_collection import blp as DocumentCollectionBlueprint
 
 api.register_blueprint(MessageBlueprint)
 api.register_blueprint(ConversationBlueprint)
 api.register_blueprint(DocumentBlueprint)
+api.register_blueprint(DocumentCollectionBlueprint)

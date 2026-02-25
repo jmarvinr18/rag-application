@@ -13,8 +13,6 @@ from app.services.Embedding.process_document import process_document_embedding
 
 from werkzeug.utils import secure_filename
 
-
-
 blp = Blueprint(
     "document",
     __name__,
@@ -37,8 +35,7 @@ class DocumentList(MethodView):
 
     @blp.response(200, DocumentSchema(many=True))
     def get(self):
-
-        return Document.query.all()
+        return DocumentModel.query.all()
 
     
 
@@ -83,8 +80,6 @@ class DocumentList(MethodView):
             job_timeout=600  # adjust if large docs
         )
         
-
-
         return jsonify({
             "message": "Upload successful",
             "document_id": str(document.id),

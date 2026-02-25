@@ -1,5 +1,10 @@
 import os
-
+import asyncio
+import sys
+# 🔥 Fix for psycopg async on Windows
+if sys.platform.startswith("win"):
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    
 from flask import Flask
 from flask_smorest import Api
 from app.config import Config
@@ -7,10 +12,14 @@ from app.extensions.redis_client import init_redis
 from sqlalchemy import text
 from app.routes import api
 from app.database import db
-from app.services.LLM import ChatGroqModel
+from app.services.LLM import ChatGroqModel, OllamaModel
+from app.services.Message import AIMessageService
 from flask_migrate import Migrate
 
 migrate = Migrate()
+
+
+
 def create_app(db_url=None):
 
     app = Flask(__name__)
@@ -46,7 +55,10 @@ def create_app(db_url=None):
         db.create_all()
 
     
-    app.ai_service = ChatGroqModel()  # model is loaded once
+    model = ChatGroqModel().get_model()  # model is loaded once
+    # model = OllamaModel().get_model()  # model is loaded once
+    app.ai_service = AIMessageService(model)
+
 
     api_endpoints = Api(app)
     api_endpoints.register_blueprint(api)

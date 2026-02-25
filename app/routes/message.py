@@ -8,7 +8,7 @@ from app.models import Message as MessageModel
 
 from app.services.Message import AIMessageService
 from app.routes import api
-
+from flask import current_app
 
 
 blp = Blueprint(
@@ -52,23 +52,25 @@ class MessageList(MethodView):
             db.session.add(user_message)
 
             # generate AI response
-            ai_text = AIMessageService().invokeWithHistory(session_id, input_text)
+            ai_text = current_app.ai_service.ask(session_id, input_text)
 
-            ai_message_data = {
-                "content": ai_text,
-                "conversation_id": session_id,
-                "role": "ai"
-            }
+            print(ai_text)
 
-            ai_message = MessageModel(**ai_message_data)
-            db.session.add(ai_message)
+            # ai_message_data = {
+            #     "content": ai_text,
+            #     "conversation_id": session_id,
+            #     "role": "ai"
+            # }
 
-            # commit once (atomic)
-            db.session.commit()
+            # ai_message = MessageModel(**ai_message_data)
+            # db.session.add(ai_message)
+
+            # # commit once (atomic)
+            # db.session.commit()
 
             return {
                 "user": message_data,
-                "ai": ai_message_data
+                "ai": ai_text["answer"]
             }, 201
 
         except SQLAlchemyError as e:

@@ -23,6 +23,6 @@ sentence_transformers
 chromadb
 langchain_chroma
 pypdf
-langchain_postgres
+langchain-postgres
 rq
 Flask-Migrate
