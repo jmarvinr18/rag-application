@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.database.db import db
 from app.schema.conversation import ConversationSchema
-from app.models import Conversation
+from app.models import Conversation as ConversationModel
 from app.routes import api
 
 
@@ -33,7 +33,7 @@ class ConversationList(MethodView):
     @blp.response(200, ConversationSchema(many=True))
     def get(self):
 
-        return Conversation.query.all()
+        return ConversationModel.query.all()
 
     @blp.arguments(ConversationSchema)
     @blp.response(201, ConversationSchema)

@@ -35,32 +35,19 @@ def process_document_embedding(document_id: str):
 
         # 4. chunk
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200)
-        splits = text_splitter.split_documents(documents)        
+        splits = text_splitter.split_documents(documents)      
+        
+        print(f"SPLITS: {splits}")  
 
         # 5. embed
-        embeddings = EmbeddingService.get_hf_embeddings()
+        embedding_chunks = PGVectorService().add_vectorstore_document(documents=splits)
+        update = []
+        for chunk in embedding_chunks:
+            update.append({"id": chunk, "document_id": document_id})
 
-        print("embeddings")
-
-        # 6. store in PGVector
-        for idx, page in enumerate(documents):
-            print(f"PAGE>>>> {page}")
-            print(f"PAGE CONTENT>>>> {page.page_content}")
-            # vector = embeddings.embed_query(page.page_content)
-            lcdocs = [LangchainDocument(page_content=page.page_content, metadata={"id": document.id})]
-            chunk = DocumentChunk(
-                document_id=document.id,
-                chunk_index=idx,
-                content=page.page_content,
-                embedding="vector",
-                token_count=len(page.page_content.split()),
-                meta={"source": document.file_path}
-            )
-            db.session.add(chunk)
-
-            print(f"LC DOCS>>>>>{lcdocs}")  
-
-            PGVectorService().add_vectorstore_document(document=documents)
+        print(f"UPDATE FOR EMBEDDING: {update}")
+        db.session.bulk_update_mappings(DocumentChunk, update)
+        db.session.commit()
 
 
         # 3. Mark completed

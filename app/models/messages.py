@@ -18,3 +18,11 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     conversation = db.relationship("Conversation", back_populates="messages")
+
+    def to_dict(self):
+        return {"id": self.id, 
+                "conversation_id": self.conversation_id,
+                "role": self.role,
+                "content": self.content,
+                "created_at": self.created_at
+                }    

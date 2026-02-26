@@ -1,49 +1,69 @@
 import os
-from langchain_postgres import PGVector, PGVectorStore, PGEngine
+from sqlalchemy import create_engine, text
+from langchain_postgres import PGVectorStore, PGEngine
 from app.services.Embedding.init_embedding import EmbeddingService
-from langchain_postgres.v2.engine import Column
 
 
 class PGVectorService:
 
     def __init__(self):
-        pass
+        self.connection = os.getenv("PSYCOPG_URL")
 
+        # LangChain engine
+        self.pg_engine = PGEngine.from_connection_string(url=self.connection)
 
-    def get_vectorstore(self):
-        connection = os.getenv("PSYCOPG_URL")
-        pg_engine = PGEngine.from_connection_string(url=os.getenv("PSYCOPG_URL"))
-        return PGVectorStore(engine=pg_engine)
+        # ✅ Raw SQL engine (NEW)
+        self.sql_engine = create_engine(self.connection)
 
+        self.embeddings = EmbeddingService().get_hf_embeddings()
 
-    def add_vectorstore_document(self,document):
-        print("will add embeddings")
+        self.store = self._init_vector_store()
 
-        result = self.get_vectorstore().add_documents(documents=document)
-        
-        if isinstance(result[0], tuple):
-            # Old version - extract from tuple
-            document_ids = [str(item[0]) if item else str(i) for i, item in enumerate(result)]
-        else:
-            # New version - direct IDs
-            document_ids = result
+        # create index safely
+        self._ensure_hnsw_index()
 
-        print(document_ids)
+        # tune search
+        self._set_ef_search()
 
+    # -------------------------
     def _init_vector_store(self):
-
-        pg_engine = PGEngine.from_connection_string(url=os.getenv("PSYCOPG_URL"))
-        embeddings = EmbeddingService().get_hf_embeddings()
-
-
-        store = PGVectorStore.create_sync(
-            engine=pg_engine,
+        return PGVectorStore.create_sync(
+            engine=self.pg_engine,
             table_name="document_chunks",
-            embedding_service=embeddings,
+            embedding_service=self.embeddings,
             id_column="id",
             content_column="content",
             embedding_column="embedding",
-            metadata_json_column="meta"
+            metadata_json_column="meta",
         )
 
+       
+
+    # -------------------------
+    def _ensure_hnsw_index(self):
+        sql = """
+        CREATE INDEX IF NOT EXISTS document_chunks_embedding_hnsw_idx
+        ON document_chunks
+        USING hnsw (embedding vector_cosine_ops)
+        WITH (m = 16, ef_construction = 200);
+        """
+
+        with self.sql_engine.begin() as conn:
+            conn.execute(text(sql))
+
+    # -------------------------
+    def _set_ef_search(self):
+        with self.sql_engine.begin() as conn:
+            conn.execute(text("SET hnsw.ef_search = 40"))
+
+    # -------------------------
+    def add_vectorstore_document(self, documents):
+        
+        store = self.store.add_documents(documents=documents)
+
+        print(f"PG VECTOR STORE: {store}")
         return store
+
+    # -------------------------
+    def as_retriever(self):
+        return self.store.as_retriever()

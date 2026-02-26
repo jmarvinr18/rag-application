@@ -54,21 +54,28 @@ class DocumentList(MethodView):
         fullname = secure_filename(file.filename)
         basename = os.path.splitext(fullname)[0].lower()
         ext = os.path.splitext(fullname)[1].lower()
+        
+        
 
-        filename = f"{secure_filename(basename)}_{uuid.uuid4().hex[:12] + ext}"
+        full_filename = f"{secure_filename(basename)}_{uuid.uuid4().hex[:12] + ext}"
         upload_dir = os.path.join(os.getcwd(), "uploads")
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-        filepath = os.path.join(upload_dir, filename)
+        filepath = os.path.join(upload_dir, full_filename)
 
         print("FILEPATH:", filepath)
         print("EXISTS DIR:", os.path.exists(os.path.dirname(filepath)))
 
         file.save(filepath)
 
+        filename= os.path.basename(filepath)
+
 
         # save DB record
-        document = DocumentModel(title=title, source=filepath, file_path=filepath, status="pending")
+        document = DocumentModel(title=filename, 
+                                 source=filepath, 
+                                 file_path=filepath, 
+                                 status="pending")
         db.session.add(document)
         db.session.commit()
         

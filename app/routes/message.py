@@ -54,23 +54,23 @@ class MessageList(MethodView):
             # generate AI response
             ai_text = current_app.ai_service.ask(session_id, input_text)
 
-            print(ai_text)
+            print(f"AI RESPONSE: {ai_text}")
 
-            # ai_message_data = {
-            #     "content": ai_text,
-            #     "conversation_id": session_id,
-            #     "role": "ai"
-            # }
+            ai_message_data = {
+                "content": ai_text["answer"],
+                "conversation_id": session_id,
+                "role": "ai"
+            }
 
-            # ai_message = MessageModel(**ai_message_data)
-            # db.session.add(ai_message)
+            ai_message = MessageModel(**ai_message_data)
+            db.session.add(ai_message)
 
-            # # commit once (atomic)
-            # db.session.commit()
+            # commit once (atomic)
+            db.session.commit()
 
             return {
                 "user": message_data,
-                "ai": ai_text["answer"]
+                "ai": ai_message_data
             }, 201
 
         except SQLAlchemyError as e:
@@ -80,3 +80,9 @@ class MessageList(MethodView):
 
 
         return {"user": message_data, "ai": ai_message_data}
+
+
+@blp.route("/conversation/<string:conversation_id>")
+def get_messages_by_conversation_id(conversation_id):
+    data = MessageModel.query.filter_by(conversation_id=conversation_id).all()
+    return [item.to_dict() for item in data], 200
