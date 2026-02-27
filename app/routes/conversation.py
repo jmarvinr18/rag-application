@@ -39,7 +39,7 @@ class ConversationList(MethodView):
     @blp.response(201, ConversationSchema)
     def post(self, conversation_data):
 
-        conversation = Conversation(**conversation_data) 
+        conversation = ConversationModel(**conversation_data) 
 
         try:
             db.session.add(conversation)
