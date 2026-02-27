@@ -9,7 +9,8 @@ from app.models import Message as MessageModel
 from app.services.Message import AIMessageService
 from app.routes import api
 from flask import current_app
-
+from app.task_queue import task_queue
+from app.services.Conversation.summarization import summarize_conversation
 
 blp = Blueprint(
     "messages",
@@ -68,9 +69,18 @@ class MessageList(MethodView):
             # commit once (atomic)
             db.session.commit()
 
+
+            # ✅ enqueue background job
+            job = task_queue.enqueue(
+                summarize_conversation,
+                str(session_id),
+                job_timeout=600  # adjust if large docs
+            )            
+
             return {
                 "user": message_data,
-                "ai": ai_message_data
+                "ai": ai_message_data,
+                "job_id": job.id
             }, 201
 
         except SQLAlchemyError as e:

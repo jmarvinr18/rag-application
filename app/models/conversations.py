@@ -8,6 +8,7 @@ class Conversation(db.Model):
 
     id = db.Column(db.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     session_id = db.Column(db.String(22), unique=True, nullable=False, default=shortuuid.uuid)
+    title = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     messages = db.relationship(

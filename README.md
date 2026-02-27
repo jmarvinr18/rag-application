@@ -27,6 +27,6 @@ docker compose up -d
 ### 3. Set Python path and run the RQ worker:
 
 ```bash
-export PYTHONPATH=.
-python app/worker.py
+
+
 ```
