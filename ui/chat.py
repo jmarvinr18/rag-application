@@ -6,7 +6,6 @@ from io import StringIO
 from ui.session_storage.session import store_messages,read_messages,store_conversation_id,get_current_conversation
 
 
-st.title("Ask Van (VanGPT)")
 def response_generator(response):
     for word in response.splitlines(keepends=True):
         yield word
