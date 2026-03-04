@@ -26,3 +26,5 @@ pypdf
 langchain-postgres
 rq
 Flask-Migrate
+streamlit[pdf]
+langchain[aws]

@@ -1,4 +1,7 @@
 import os
+import io
+import base64
+import mimetypes
 from app.services.Prompt import PromptTemplate
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -13,6 +16,7 @@ from langchain_classic.chains import create_history_aware_retriever
 from langchain_huggingface import HuggingFaceEmbeddings
 from app.services.VectorStore.pgvector import PGVectorService
 from app.services.Embedding.init_embedding import EmbeddingService
+from pdf2image import convert_from_path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -74,3 +78,77 @@ class AIMessageService:
             config=config
         )
     
+
+    def parse_document(self, image_path):
+
+        print(f"IMAGE PATH: {image_path}")
+
+
+        if not image_path:
+            return None
+        
+        if not os.path.exists(image_path):
+            raise ValueError(f"Image not found: {image_path}")
+        
+        mime_type, _ = mimetypes.guess_type(image_path)
+        results = []
+
+        if mime_type in ["image/png", "image/jpeg", "image/webp"]:
+            image_b64 = self._encode_image(image_path)
+            response = self._invoke_bedrock_image(image_b64, mime_type)
+            results.append(response.content)
+
+        elif mime_type == "application/pdf":
+            pages = convert_from_path(
+                image_path,
+                dpi=200,
+                fmt="png",
+                poppler_path=r"C:\poppler-25.12.0\Library\bin"
+            )
+
+            for i, page in enumerate(pages):
+                buffer = io.BytesIO()
+                page.save(buffer, format="PNG")
+
+
+                image_b64 = base64.b64encode(buffer.getvalue()).decode()
+
+                response = self._invoke_bedrock_image(image_b64,"image/png")
+
+                print(f"RESPONSE: {response.content}")
+
+                results.append(response.content)
+        else:
+            raise ValueError(f"Unsupported file type: {mime_type}")
+        
+        return results
+        
+    
+
+    def _invoke_bedrock_image(self, image_b64, mime_type):
+        message = HumanMessage(
+            content=[
+                {
+                    "type": "text",
+                    "text": (
+                        "Extract ALL text, tables, and important visual information "
+                        "from this document page. Preserve table structure. "
+                        "Then translate everything to English."
+                    ),
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": mime_type,
+                        "data": image_b64,
+                    },
+                },
+            ]
+        )
+
+        return self.model.invoke([message]) 
+    
+    def _encode_image(self, image_path):
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()

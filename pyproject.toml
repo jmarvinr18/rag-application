@@ -14,3 +14,5 @@ dependencies = [
     "langchain-openai>=1.1.8",
     "python-dotenv>=1.2.1",
 ]
+[tool.streamlit.components.v1]
+asset_dir = "assets"

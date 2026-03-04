@@ -12,7 +12,7 @@ from app.extensions.redis_client import init_redis
 from sqlalchemy import text
 from app.routes import api
 from app.database import db
-from app.services.LLM import ChatGroqModel, OllamaModel
+from app.services.LLM import ChatGroqModel, OllamaModel, AWSBedrockModel
 from app.services.Message import AIMessageService
 from flask_migrate import Migrate
 
@@ -55,7 +55,8 @@ def create_app(db_url=None):
         db.create_all()
 
     
-    model = ChatGroqModel().get_model()  # model is loaded once
+    # model = ChatGroqModel().get_model()  # model is loaded once
+    model = AWSBedrockModel("arn:aws:bedrock:ap-southeast-1:408897322877:application-inference-profile/pf3b7fwx6on0").get_model()
     # model = OllamaModel().get_model()  # model is loaded once
     app.ai_service = AIMessageService(model)
 

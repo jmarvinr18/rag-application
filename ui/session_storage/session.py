@@ -13,3 +13,7 @@ def store_conversation_id(session_id):
 
 def get_current_conversation():
     return st.session_state.current_conversation
+
+
+def set_document_id(key):
+    st.session_state.document_id = key
