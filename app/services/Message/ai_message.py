@@ -131,9 +131,12 @@ class AIMessageService:
                 {
                     "type": "text",
                     "text": (
-                        "Extract ALL text, tables, and important visual information "
-                        "from this document page. Preserve table structure. "
-                        "Then translate everything to English."
+                        "You are an expert AI assistant, you are tasked with extracting the entire text from any PDF document. The document can be simple, complex, or even scanned, this shouldn't matter to you."
+                        "You will be given the entire PDF as input. Start examining the document page by page, when you come across text, extract it as is don't convert it into another format like HTML or Markdown. If you come across images, replace them with a very detailed description of the image while taking into consideration the context around it."
+                        "When you come across tables, describe them too like the image. The description should be very detailed and in a way that someone will understand the table without seeing it."
+                        "Make sure to keep the structure of the document, if there are sections, subsections, bullet points, or numbered lists, make sure to keep them as is. If there are any headers, footers, page numbers, remove them."
+                        "The final output should be a clean, well-structured text that represents the content of the entire PDF document as closely as possible to how a human would see it with their eyes when reading the document. Don't say anything else, just output the text you extracted from the PDF."
+                        "Here is the PDF:"
                     ),
                 },
                 {

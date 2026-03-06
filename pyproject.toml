@@ -12,6 +12,7 @@ dependencies = [
     "langchain-google-genai>=4.2.0",
     "langchain-groq>=1.1.2",
     "langchain-openai>=1.1.8",
+    "pydantic>=2.12.5",
     "python-dotenv>=1.2.1",
 ]
 [tool.streamlit.components.v1]

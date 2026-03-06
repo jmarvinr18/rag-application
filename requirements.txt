@@ -28,3 +28,5 @@ rq
 Flask-Migrate
 streamlit[pdf]
 langchain[aws]
+langchain-text-splitters 
+nltk

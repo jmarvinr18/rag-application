@@ -109,7 +109,8 @@ class DocumentList(MethodView):
         job = task_queue.enqueue(
             process_document_embedding,
             str(document.id),
-            job_timeout=600  # adjust if large docs
+            filename,
+            job_timeout=6000  # adjust if large docs
         )
         
         return jsonify({
@@ -118,8 +119,6 @@ class DocumentList(MethodView):
             "job_id": job.id,
             "status": "pending"
         })
-
-
 
 UPLOAD_FOLDER = os.path.abspath("C:/Users/USER/Documents/machine-learning/projects/slgs/rag-poc/app/uploads")
 @blp.route("/uploads/<path:filename>")
