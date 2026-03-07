@@ -17,7 +17,10 @@ from markitdown import MarkItDown
 from flask import current_app
 
 from langchain_text_splitters import NLTKTextSplitter
-from .agentic_chunking import use_find_chunk_and_push_proposition
+from .agentic_chunking import AgenticChunker
+import nltk
+nltk.download("punkt")
+from nltk.tokenize import sent_tokenize
 
 def process_document_embedding(document_id: str, filename:str):
 
@@ -77,19 +80,20 @@ def split_document(file_path, filename):
 
     documents = loader.load()
 
-    # splits = use_recursive_chunking(documents)
+    chunker = AgenticChunker()
 
-    splitter = NLTKTextSplitter()
+    for doc in documents:
+        print(f"DOCS:.....{doc}")
+        if doc and hasattr(doc, "page_content"):
+            sentences = sent_tokenize(doc.page_content)
+            for s in sentences:
+                chunker.use_find_chunk_and_push_proposition(s)
 
-    sentences = splitter.split_documents(documents)
+    chunks = chunker.get_chunks()
 
-    print(f"SENTENCES: {sentences}")
-
-    splits = use_find_chunk_and_push_proposition(sentences)
-
-    print(f"SPLIT WITH PROPOSITION: {splits}")
+    print(f"CHUNKS: {chunks}")
  
-    return splits  
+    return chunks  
 
 def analyze_and_convert_document(file_path: str, filename: str):
 
@@ -105,7 +109,7 @@ def analyze_and_convert_document(file_path: str, filename: str):
             # Open the file in append mode ('a')
             with open(md_filename, "a", encoding="utf-8") as file:
                 # Append content to the file
-                file.write(r + "\n")
+                file.write(r)
             print(f"Appended to {md_filename} successfully.")
 
         except Exception as e:
