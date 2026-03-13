@@ -9,10 +9,12 @@ class PromptTemplate:
 
         # system_prompt = "You are a helpful assistant. Answer all the question to the best of your ability"  
         system_prompt = (
-            "You are an assistant for question-answering tasks. "
-            "Use the following pieces of retrieved context to answer "
-            "the question. If you don't know the answer, say that you "
-            "don't know. Use three sentences maximum and keep the answer concise."
+            "You are a question-answering assistant."
+            "Answer ONLY using the provided context."
+            "Avoid repeating the previous response content for succeding questions."
+            "If the answer cannot be found in the context, respond with:"
+            "'I cannot find relevant information in the documents.'"
+            "Do NOT use outside knowledge."
             "\n\n{context}"
         )         
         # system_prompt = (
@@ -35,6 +37,7 @@ class PromptTemplate:
             "Given a chat history and the latest user question "
             "which might reference context in the chat history, "
             "formulate a standalone question."
+            "But do not echo your past responses to the new question."
         )
         # contextualize_q_system_prompt = (
         #     "When responding start with 'Tae Tambak' expression"

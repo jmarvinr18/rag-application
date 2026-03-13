@@ -56,7 +56,7 @@ def create_app(db_url=None):
 
     
     # model = ChatGroqModel().get_model()  # model is loaded once
-    model = AWSBedrockModel("arn:aws:bedrock:ap-southeast-1:408897322877:application-inference-profile/pf3b7fwx6on0").get_model()
+    model = AWSBedrockModel("arn:aws:bedrock:ap-southeast-1:408897322877:application-inference-profile/oa15rzb7dbe9").get_model()
     # model = OllamaModel().get_model()  # model is loaded once
     app.ai_service = AIMessageService(model)
 

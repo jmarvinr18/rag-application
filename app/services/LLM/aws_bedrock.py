@@ -3,8 +3,6 @@ from langchain_aws import ChatBedrock
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-
 class AWSBedrockModel:
     
     _instance = None
@@ -17,7 +15,14 @@ class AWSBedrockModel:
 
 
     def _init_model(self, model_name):
-        # load the model once
+
+        load_dotenv(".env",override=True)
+
+        os.environ["BEDROCK_API_KEY"] = os.getenv("BEDROCK_API_KEY")
+        os.environ["AWS_ACCESS_KEY_ID"] = os.getenv("AWS_ACCESS_KEY_ID")
+        os.environ["AWS_SECRET_ACCESS_KEY"] = os.getenv("AWS_SECRET_ACCESS_KEY")
+        os.environ["AWS_DEFAULT_REGION"] = os.getenv("AWS_DEFAULT_REGION")
+        
         self.model = ChatBedrock(
             model_id=model_name,
             region_name="ap-southeast-1",

@@ -41,10 +41,10 @@ def process_document_embedding(document_id: str, filename:str):
         print(f"PARSE DOCS BY CLAUDE: {response}")        
 
         # 4. chunk
-        splits = split_document(file_path, filename)
+        chunks = split_document(file_path, filename)
 
         # 5. embed
-        store_vector_db(splits, document_id)
+        store_vector_db(chunks, document_id)
 
         # 3. Mark completed
         update_document_status(document, document_id)
@@ -62,17 +62,40 @@ def update_document_status(document, document_id):
 
     print(f"[WORKER] Completed {document_id}")  
 
-def store_vector_db(splits, document_id):
-    embedding_chunks = PGVectorService().add_vectorstore_document(documents=splits)
-    update = []
-    for chunk in embedding_chunks:
-        update.append({"id": chunk, "document_id": document_id})
+def store_vector_db(chunks, document_id):
+    
+    embedding_model = EmbeddingService().get_hf_embeddings()
+    # embedding_chunks = PGVectorService().add_vectorstore_document(documents=splits)
+    # update = []
+    # for chunk in embedding_chunks:
+    #     update.append({"id": chunk, "document_id": document_id})
 
-    print(f"UPDATE FOR EMBEDDING: {update}")
-    db.session.bulk_update_mappings(DocumentChunk, update)
-    db.session.commit()
+    # print(f"UPDATE FOR EMBEDDING: {update}")
+    # db.session.bulk_update_mappings(DocumentChunk, update)
+    # db.session.commit()
+
+    for chunk in chunks:
+        content = f"""
+            Title: {chunk['title']}
+            Summary: {chunk['summary']}
+            Propositions: {" ".join(chunk["propositions"])}
+        """
+
+        vector = embedding_model.embed_query(content)
+
+        db_chunk = DocumentChunk(
+            document_id=document_id,
+            chunk_index=chunk['id'],
+            content=content,
+            embedding=vector,
+            meta=chunk
+        )
+
+        db.session.add(db_chunk)
+        db.session.commit()    
 
 def split_document(file_path, filename):
+    chunks = []
     loader = TextLoader(
         analyze_and_convert_document(file_path, filename),
         encoding="utf-8"
@@ -84,12 +107,18 @@ def split_document(file_path, filename):
 
     for doc in documents:
         print(f"DOCS:.....{doc}")
-        if doc and hasattr(doc, "page_content"):
-            sentences = sent_tokenize(doc.page_content)
-            for s in sentences:
-                chunker.use_find_chunk_and_push_proposition(s)
+        sentences = sent_tokenize(doc.page_content)
+        for s in sentences:
 
-    chunks = chunker.get_chunks()
+            chunk = chunker.use_find_chunk_and_push_proposition(s)
+            print(f"CHUNK====|>>{chunk}")
+
+            index = next((i for i, c in enumerate(chunks) if c["id"] == chunk["id"]), None)
+
+            if index is not None:
+                chunks[index] = chunk
+            else:
+                chunks.append(chunk)
 
     print(f"CHUNKS: {chunks}")
  
@@ -123,23 +152,23 @@ def convert_to_md(document: str, filename:str):
 
     PATH = "http://localhost:5001/api/v1/documents/uploads"
 
-    UPLOAD_FOLDER = "app/uploads"
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    # UPLOAD_FOLDER = "app/uploads"
+    # os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-    md = MarkItDown()
-    result = md.convert(document)
-    md_filename = f"{UPLOAD_FOLDER}/{filename}.md"
-    print(result)
+    # md = MarkItDown()
+    # result = md.convert(document)
+    # md_filename = f"{UPLOAD_FOLDER}/{filename}.md"
+    # print(result)
 
-    try:
-        # Open the file in write mode ('w')
-        with open(md_filename, "w", encoding="utf-8") as file:
-            # Write content to the file
-            file.write(result.text_content)
-        print(f"File {md_filename} created and written to successfully.")
+    # try:
+    #     # Open the file in write mode ('w')
+    #     with open(md_filename, "w", encoding="utf-8") as file:
+    #         # Write content to the file
+    #         file.write(result.text_content)
+    #     print(f"File {md_filename} created and written to successfully.")
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    # except Exception as e:
+    #     print(f"An error occurred: {e}")
 
     return f"{PATH}/{filename}.md"
 

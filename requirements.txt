@@ -30,3 +30,4 @@ streamlit[pdf]
 langchain[aws]
 langchain-text-splitters 
 nltk
+rank_bm25

@@ -18,6 +18,8 @@ from app.services.VectorStore.pgvector import PGVectorService
 from app.services.Embedding.init_embedding import EmbeddingService
 from pdf2image import convert_from_path
 from dotenv import load_dotenv
+from langchain_classic.retrievers import EnsembleRetriever
+from langchain_community.retrievers import BM25Retriever
 
 load_dotenv()
 
@@ -31,10 +33,25 @@ class AIMessageService:
 
         self.vector_store = PGVectorService()._init_vector_store()
         
-        self.retriever = self.vector_store.as_retriever(
+        vector_retriever = self.vector_store.as_retriever(
             search_type="mmr",
-            search_kwargs={"k": 4,"fetch_k": 12},            
+            search_kwargs={"k": 5, "fetch_k": 20}
         )
+
+        docs = self.vector_store.similarity_search("", k=1000)
+
+        bm25_retriever = BM25Retriever.from_documents(docs)
+        bm25_retriever.k = 5        
+
+        self.retriever = EnsembleRetriever(
+            retrievers=[vector_retriever, bm25_retriever],
+            weights=[0.7, 0.3]
+        )
+
+        # self.retriever = self.vector_store.as_retriever(
+        #     search_type="mmr",
+        #     search_kwargs={"k": 5,"fetch_k": 20, "lambda_mult": 0.7},            
+        # )
         self.rag_chain = self._build_chain()
         self.with_history = self._init_runnable_message_history()
 
@@ -73,11 +90,53 @@ class AIMessageService:
 
         config = {"configurable": {"session_id": conversation_id}}
 
-        return self.with_history.invoke(
+        # Step 1: retrieve relevant docs
+        docs = self.retrieve_relevant_docs(human_message)
+
+        # Step 2: guardrail
+        if not docs:
+            return {
+                "answer": "No relevant information found in the knowledge base.",
+                "sources": []
+            }
+        
+        # Step 3: normal RAG execution
+        response = self.with_history.invoke(
             {"input": human_message},
             config=config
         )
+
+        return {
+            "answer": response["answer"],
+            "sources": [doc.metadata for doc in docs]
+        }
+
+        # return self.with_history.invoke(
+        #     {"input": human_message},
+        #     config=config
+        # )
     
+    def retrieve_relevant_docs(self,question):
+
+        docs = self.retriever.invoke(question)
+
+        if not docs:
+            return []
+
+        return docs        
+
+        # SIMILARITY_THRESHOLD = 0.50
+        
+        # docs_and_scores = self.vector_store.similarity_search_with_score(question, k=5)
+
+        # print(f"DOCS AND SCORE: {docs_and_scores}")
+
+        # filtered_docs = [
+        #     doc for doc, score in docs_and_scores
+        #     if score < SIMILARITY_THRESHOLD
+        # ]
+
+        # return filtered_docs
 
     def parse_document(self, image_path):
 
@@ -136,6 +195,7 @@ class AIMessageService:
                         "When you come across tables, describe them too like the image. The description should be very detailed and in a way that someone will understand the table without seeing it."
                         "Make sure to keep the structure of the document, if there are sections, subsections, bullet points, or numbered lists, make sure to keep them as is. If there are any headers, footers, page numbers, remove them."
                         "If there are line breaks mid-sentence, please remove it and display the entire sentence or paragraph in smooth flow."
+                        "If there's table that is cut to the next page and has no header, please use the header of the table from the previous page."
                         "The final output should be a clean, well-structured text that represents the content of the entire PDF document as closely as possible to how a human would see it with their eyes when reading the document. Don't say anything else, just output the text you extracted from the PDF."
                         "Here is the PDF:"
                     ),

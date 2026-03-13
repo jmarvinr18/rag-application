@@ -14,7 +14,7 @@ class ChunkMeta(BaseModel):
 class AgenticChunker:
 
     def __init__(self):
-        self.chunks = {}
+        self.chunks = []
         self.llm = self.__init_llm()
 
     def __init_llm(self):
@@ -42,13 +42,16 @@ class AgenticChunker:
             }
         )
 
-        self.chunks[chunk_id] = {
+        chunk = {
+            "id": chunk_id,
             "summary": chunk_meta.summary,
             "title": chunk_meta.title,
             "propositions": [proposition],
         }
 
-        return chunk_id
+        self.chunks.append(chunk)
+
+        return chunk
 
 
 
@@ -69,7 +72,8 @@ class AgenticChunker:
         ])
         summary_chain = summary_prompt_template | summary_llm
 
-        chunk = self.chunks[chunk_id]
+        chunk = self.get_chunk_by_id(chunk_id)
+
         current_summary = chunk["summary"]
         current_title = chunk["title"]
         current_propositions = chunk["propositions"]
@@ -119,21 +123,32 @@ class AgenticChunker:
         )
 
         allocation_chain = allocation_prompt | allocation_llm
+
         chunks_summaries = {
-            chunk_id: chunk["summary"] for chunk_id, chunk in self.chunks.items()
+            chunk["id"]: chunk["summary"] for chunk in self.chunks
         }
 
         best_chunk_id = allocation_chain.invoke(
             {"proposition": proposition, "chunks_summaries": chunks_summaries}
         ).chunk_id
 
-        if best_chunk_id not in self.chunks:
-            best_chunk_id = self.create_new_chunk(best_chunk_id, proposition)
-            return
+        # if best_chunk_id not in self.chunks:
+        #     best_chunk_id = self.create_new_chunk(best_chunk_id, proposition)
+        #     return
 
-        self.add_proposition(best_chunk_id, proposition)
+        chunk = self.get_chunk_by_id(best_chunk_id)        
 
-        return proposition
+        if chunk is None:
+            return self.create_new_chunk(best_chunk_id, proposition)
+        
+        return self.add_proposition(best_chunk_id, proposition)
+
+    
+    def get_chunk_by_id(self, chunk_id):
+        for chunk in self.chunks:
+            if chunk["id"] == chunk_id:
+                return chunk
+        return None    
     
     def get_chunks(self):
         return self.chunks

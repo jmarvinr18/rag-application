@@ -17,7 +17,7 @@ def use_recursive_chunking(documents):
         chunk_size=800,
         chunk_overlap=150,
         separators=["\n\n", "\n", ". ", " ", ""],
-        )
+      )
     
     splits = recursive_splitter.split_documents(header_docs)
     print(f"SPLITS: {splits}") 
