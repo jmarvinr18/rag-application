@@ -97,8 +97,9 @@ class DocumentList(MethodView):
         md_source = convert_to_md(filepath, filename)
         # save DB record
         document = DocumentModel(title=filename, 
-                                 source=md_source, 
+                                 source=public_filepath, 
                                  file_path=filepath, 
+                                 md_location=md_source,
                                  doc_type=ext,
                                  status="pending")
         db.session.add(document)

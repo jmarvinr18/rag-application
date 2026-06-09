@@ -21,13 +21,13 @@ def summarize_conversation(convesation_id: str):
     
     try:
 
-        input_text = "Make me an 8 word summary as title about my current or previous"
+        input_text = "Make me an 8 word summary as title about my current or previous question."
 
-        ai_text = current_app.ai_service.ask(convesation_id, input_text)
+        title = current_app.ai_service.make_title(convesation_id, input_text)
 
-        print(f"SUMMARY TITLE: {ai_text["answer"]}")
+        print(f"SUMMARY TITLE: {title}")
 
-        conversation.title = ai_text["answer"]
+        conversation.title = title
         db.session.commit()
 
         print(f"[WORKER] Completed {convesation_id}")

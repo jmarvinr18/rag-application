@@ -9,7 +9,7 @@ from ui.session_storage.session import store_messages,read_messages,store_conver
 def response_generator(response):
     for word in response.splitlines(keepends=True):
         yield word
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 if "current_conversation" not in st.session_state:
     st.write("No stored conversation yet.")
@@ -39,6 +39,7 @@ else:
             }
         )  
         data = response.json()
+        
         ai_text = data["ai"]["content"]
 
         # Display assistant response in chat message container
@@ -96,14 +97,37 @@ def get_conversations():
     response = requests.get("http://localhost:5001/api/v1/conversations")     
     return response.json()
 
+st.markdown("""
+<style>
+/* Reduce spacing between sidebar elements */
+section[data-testid="stSidebar"] .stVerticalBlock {
+    gap: 0.1rem;  /* adjust as needed */
+}
+</style>
+""", unsafe_allow_html=True)
+
+def truncate(text, max_len=30):
+    return text if len(text) <= max_len else text[:max_len] + "..."
+
 with st.sidebar:
     st.button(label="➕ New Conversation",type="tertiary", on_click=create_new_conversation)
     st.subheader("Conversations", divider="gray")
     conversations = get_conversations()
-    
+
     for con in conversations:
 
         if con["title"] is not None:
             title = con["title"]
-            st.button(label=title, key=f"conv_btn_{con['id']}", on_click=get_conversation_thread, args=(con["id"],),type="tertiary")
+
+            st.markdown("""
+            <style>
+            div.stButton > button {
+                text-align: left;
+                width: 100%;                       
+            }             
+            </style>
+            """, unsafe_allow_html=True)
+
+            # st.button("Left aligned text")            
+            st.button(label=truncate(title), key=f"conv_btn_{con['id']}", on_click=get_conversation_thread, args=(con["id"],),type="tertiary")
 

@@ -1,0 +1,254 @@
+
+            Title: The State of AI in Operations 2025
+            Summary: In January 2025, a survey of over 1,000 managers and senior business leaders assessed AI adoption in operations. The findings indicate that 28% of businesses are already using AI, with 45% having active implementation plans. Key insights include investment trends, challenges in AI adoption, and the role of AI agents. Businesses are planning to increase their AI investments significantly, with many intending to spend over $100,000. The survey highlights a positive outlook for AI adoption across various industries, with 73% of businesses either using AI or planning to implement it.
+            Propositions: Glide
+
+The state of AI in operations 2025
+
+In January 2025, we surveyed over 1,000 managers and senior business leaders to learn about where they are in the process of AI adoption and what impact AI technology is having on their operations. ]Table of contents
+
+Key takeaways                                                                                                                          3
+
+A snapshot of AI adoption                                                                                                      4
+    Who is using AI                                                                                                                    4
+    Impact: anticipation vs. reality                                                                                            5
+    Investment                                                                                                                           6
+
+The AI adoption curve                                                                                                              8
+    AI Adopters                                                                                                                           8
+    AI Planners                                                                                                                         10
+    AI Rejectors                                                                                                                        11
+
+AI implementation                                                                                                                  14
+    Motivation                                                                                                                         14
+    Use cases                                                                                                                           15
+    Tools                                                                                                                                16
+    Success                                                                                                                            18
+
+AI agents                                                                                                                               19
+    Who is using AI agents                                                                                                       20
+    How AI agents are being built                                                                                            21
+    Number of AI agents deployed                                                                                           23
+
+Challenges and barriers to AI adoption                                                                                  24
+    Security                                                                                                                           24
+    Lack of knowledge                                                                                                             24
+    Integration                                                                                                                       25
+    AI barriers by industry                                                                                                      25
+    Internal conflicts                                                                                                              26
+    Will AI take our jobs? Our January 2025 survey of over 1,000 managers and business leaders found that AI adoption is well underway across business operations. We learned who is ahead of the curve and who is struggling to catch up. Key Takeaways: AI adoption is underway across businesses, and the outlook is positive
+
+AI adoption rates are high and climbing quickly
+
+Our survey found that 28% of businesses are already using AI, and another 45% have active implementation plans underway. Businesses using AI are planning to increase their investment in 2025
+
+34% of businesses planning to use AI plan to spend over $100,000, while 57% of those already actively using AI in their operations plan to spend $100,000 or more. ## 73% of businesses are already using AI or have active plans to
+
+Almost three-quarters of businesses either already use AI or have active plans to roll it out. Only a small minority of respondents indicate that they have no interest at all in AI implementation. ### 73% of businesses are using AI or have active implementation plans
+
+A large donut chart displays the breakdown of AI adoption status among businesses:
+
+The chart shows that 73% of businesses are using AI or have plans to implement it, which is divided into:
+- 45% have AI implemented (shown in dark teal)
+- 28% have active plans to implement AI (shown in medium teal)
+- 19% want to implement AI but don't know how (shown in light gray)
+- 8% have no interest in implementing AI (shown in lighter gray)
+
+The chart includes a legend identifying each segment with its corresponding percentage and color. ---
+
+At the top of the page, four pie charts display demographic information about survey respondents:
+
+Business Size: 32% Enterprise (100+), 43% Middle businesses (100-999), 25% Small businesses (10-99)
+
+Industry: 19% Construction, 19% Manufacturing, 18% Retail, 17% Technology, 26% Other
+
+Role: 45% Manager, 31% Director, 4% VP & C-level, 0% Individual contributor
+
+Department: 31% IT, 22% Operations, 15% HR, 8% Customer service & support, 29% Other
+
+Below this is a section titled "Participating countries" showing a horizontal bar chart where the US represents 71% of participants, UK represents 14%, Canada represents 8%, and Australia/New Zealand represents 7%. At the bottom, there is a notation: "Glide: 18% Transportation & Logistics, 18% Other, 18% Admin, 8% Sales, 11% Other"Based on this data, we categorized survey respondents into 3 groups in order to learn more about where businesses are already providing successful and why other businesses are further behind in their AI adoption. :
+
+AI Adopters
+Businesses already using AI in their operations
+28%
+
+AI Planners
+Businesses with active plans to implement AI in the near future
+64%
+
+AI Rejectors
+Businesses who have no plans to implement AI
+8%
+
+We'll go into detail about each of these groups later. Businesses are investing more in AI
+
+Businesses planning to use AI in 2025 are investing significant resources into it—and for more than the cost of a ChatGPT Pro account. 39% of businesses are allocating between $10,000 and $99,999 for 2025, with the next largest segment, at 29%, investing between $100,000 and $499,999.43%
+
+of businesses plan to invest at least $100,000 in AI technology in 2025
+
+The state of AI in operations - 2025
+
+Glide
+
+
+Manufacturing, transportation & logistics, retail, and tech are allocating the most budget towards AI, with over 50% of respondents planning to invest over $100,000 in 2025. The businesses that have already begun using AI are continuing to increase their investment, allocating significantly more money on average to AI tech than those in the planning stages. Businesses already using AI are doubling down on investment in 2025
+
+Percent of businesses planning to spend over $100K on AI tools in 2025
+
+Planners                                                     Adopters
+34%                                                          57%
+
+Businesses in the planning stages of AI adoption     Businesses actively using AI in their operations
+
+The state of AI in operations - 2025
+
+GlideThe AI adoption curve
+
+We asked questions to learn more about which businesses are already using AI, which are in the active planning phase, and which are choosing not to use AI at all. AI Adopters
+
+AI Adopters are the 28% of respondents who report that they are already using AI in their organization. We asked them specific questions about where they are using AI, what tools they've tried, and how successful their AI adoption has been in each area. Larger businesses report higher levels of AI implementation, with Enterprises using AI at over 2x the rate of small businesses. Over the next 5 years, my company aims to integrate AI more deeply into its strategic operations. The goal would be to leverage AI to gain a competitive edge, improve innovation, and adapt to changing market demands.AI Planners
+
+AI Planners are the largest group of businesses surveyed. 45% report they have active plans to implement AI, while 19% report they want to implement AI but don't know how. Planners' biggest hope when adopting AI is to drive more efficiency. They are less likely to explore custom-built tools and more tailored solutions like AI agents.Early AI adoption is starting with generative AI platforms and existing software vendors
+
+A horizontal bar chart showing adoption methods, listed from highest to lowest:
+
+72% - Generative AI platforms
+64% - AI features integrated within existing platforms
+57% - New AI offerings from existing vendors
+35% - AI-First solutions for specific use cases
+28% - Custom built AI with code
+26% - Custom built AI with no/low code
+
+The state of AI in operations – 2025
+Glide
+
+
+What AI Planners are saying
+
+It's a new technology so I want to get in early but also cautiously. Half of AI rejectors (49%) have no plans to implement AI in the future, and a majority of AI Rejectors said their business hasn't experimented with any AI tools at all.Many of the businesses that opt out of AI haven't tried it and don't plan to
+
+[A donut chart showing 68% never used AI]
+
+[A donut chart showing 49% don't plan to use AI in the foreseeable future]
+
+Businesses choosing not to use AI
+
+The state of AI in operations - 2025
+
+Surprisingly, even AI rejectors seem to have an optimistic outlook on AI's ability to give businesses a competitive edge. I will wait until it is proven to be reliable.AI implementation: Motivation, use cases, tools, and pathways to success
+
+We wanted to understand what businesses are hoping to achieve with AI and get a better idea of where it's being used and what tools are being deployed for those tasks. Motivation: Why are businesses implementing AI? They are also the most price-sensitive when evaluating AI vendors, with 27% valuing cost highest. Use Cases: Where are businesses implementing AI? Where are businesses using AI for, and how effective are they finding it? Tools: How are businesses implementing AI? Almost three-quarters of the tools respondents are using are supplied to them by their company. Success: What tools are businesses finding most effective? The source citation reads "The state of AI in operations – 2025" and the Glide logo appears in the bottom right corner. While fewer agents are being built from scratch, businesses use more agents when they can develop their own
+
+Businesses building their own AI agents are also significantly more likely to be using a larger number of agents in their operations. "Study Methodology
+
+The results in this report are from an online survey of 1,071 respondents conducted from January 16 to 28, 2025. Authors
+
+Wren Noble
+
+Leading Glide's content, including The Column, Case Studies, and Video Content, Wren's expertise lies in AI, no code technology, business tools, and software marketing. ]Glide
+
+The state of AI in operations 2025
+
+In January 2025, we surveyed over 1,000 managers and senior business leaders to learn about where they are in the process of AI adoption and what impact AI technology is having on their operations. Our January 2025 survey of over 1,000 managers and business leaders found that AI adoption is well underway across business operations. Key Takeaways: AI adoption is underway across businesses, and the outlook is positive
+
+AI adoption rates are high and climbing quickly
+
+Our survey found that 28% of businesses are already using AI, and another 45% have active implementation plans underway. Businesses using AI are planning to increase their investment in 2025
+
+34% of businesses planning to use AI plan to spend over $100,000, while 57% of those already actively using AI in their operations plan to spend $100,000 or more. ## 73% of businesses are already using AI or have active plans to
+
+Almost three-quarters of businesses either already use AI or have active plans to roll it out. ### 73% of businesses are using AI or have active implementation plans
+
+A donut chart showing the breakdown of AI adoption status across businesses displays the following segments:
+
+- Have AI implemented (dark teal): 45%
+- Have active plans to implement AI (medium teal): 28%
+- Want to implement AI but don't know how (light gray): 19%
+- Have no interest in implementing AI (light gray): 8%
+
+The center of the donut contains text stating "73% are using AI or have plans to implement"
+
+---
+
+At the top of the page are four pie charts displaying demographic information about survey respondents:
+
+Business Size: 32% Enterprise (100+), 43% Midsize businesses (100-999), 25% Small businesses (10-99)
+
+Industry: 19% Construction, 19% Manufacturing, 16% Retail, 17% Technology, 26% Other
+
+Role: 65% Manager, 31% Director, 4% VP & C-level, 0% Individual contributor
+
+Department: 31% IT, 22% Operations, 15% HR, 8% Customer service & support, 29% Other
+
+---
+
+Participating countries section shows:
+71% US, 14% UK, 8% CAD, 7% AUS/NZ
+
+Glide includes 8% Transportation & Logistics, 18% Other, 8% Admin, 8% Sales, 11% OtherBased on this data, we categorized survey respondents into 3 groups in order to learn more about where businesses are already providing successful and why other businesses are further behind in their AI adoption. :
+
+AI Adopters
+Businesses already using AI in their operations
+28%
+
+AI Planners
+Businesses with active plans to implement AI in the near future
+64%
+
+AI Rejectors
+Businesses who have no plans to implement AI
+8%
+
+We'll go into detail about each of these groups later. The source is noted as "The state of AI in operations - 2025" with the Glide logo visible. Businesses are investing more in AI
+
+Businesses planning to use AI in 2025 are investing significant resources into it—and for more than the cost of a ChatGPT Pro account. 39% of businesses are allocating between $10,000 and $99,999 for 2025, with the next largest segment, at 29%, investing between $100,000 and $499,999.43%
+of businesses plan to invest at least $100,000 in AI technology in 2025
+
+The state of AI in operations - 2025
+Glide
+
+
+Manufacturing, transportation & logistics, retail, and tech are allocating the most budget towards AI, with over 50% of respondents planning to invest over $100,000 in 2025. The businesses that have already begun using AI are continuing to increase their investment, allocating significantly more money on average to AI tech than those in the planning stages. Businesses already using AI are doubling down on investment in 2025
+
+Percent of businesses planning to spend over $100K on AI tools in 2025
+
+Planners
+34%
+Businesses in the planning stages of AI adoption
+
+Adopters
+57%
+Businesses actively using AI in their operations
+
+The state of AI in operations - 2025
+GlideThe AI adoption curve
+
+We asked questions to learn more about which businesses are already using AI, which are in the active planning phase, and which are choosing not to use AI at all. AI Adopters
+
+AI Adopters are the 28% of respondents who report that they are already using AI in their organization. 47% of software & technology companies report using AI already, with retail, professional services, manufacturing, and transportation and logistics following at between 25-27%. Over the next 5 years, my company aims to integrate AI more deeply into its strategic operations. 45% report they have active plans to implement AI, while 19% report they want to implement AI but don't know how. They are less likely to explore custom-built tools and more tailored solutions like AI agents.Early AI adoption is starting with generative AI platforms and existing software vendors
+
+A horizontal bar chart showing adoption methods displays the following data:
+
+72% - Generative AI platforms
+64% - AI Features integrated within existing platforms
+57% - New AI offerings from existing vendors
+35% - AI-First solutions for specific use cases
+28% - Custom built AI with code
+26% - Custom built AI with no/low code
+
+The state of AI in operations – 2025
+
+What AI Planners are saying
+
+It's a new technology so I want to get in early but also cautiously. Motivation: Why are businesses implementing AI? Source: The state of AI in operations - 2025, Glide
+
+Revenue remains a steady third-place priority across businesses of all sizes. Use Cases: Where are businesses implementing AI? Where are businesses using AI for, and how effective are they finding it? Tools: How are businesses implementing AI? They are typically more customized since they need to work with the unique needs of the businesses deploying them.47% of businesses that have implemented AI are already using AI agents
+
+94% of businesses that have adopted AI are also using AI agents or planning to
+
+[A donut chart showing the breakdown of AI agent adoption among businesses that have implemented AI. The vast majority of businesses using AI are also either already using AI agents (47%) or have plans to (47%). Enterprise organizations are also using a larger number of AI agents, with 26% having 11+ agents deployed compared to 3% of small businesses and 9% of midsized businesses. "Study Methodology
+
+The results in this report are from an online survey of 1,071 respondents conducted from January 16 to 28, 2025.
+        
+
+{"id": 1, "summary": "In January 2025, a survey of over 1,000 managers and senior business leaders assessed AI adoption in operations. The findings indicate that 28% of businesses are already using AI, with 45% having active implementation plans. Key insights include investment trends, challenges in AI adoption, and the role of AI agents. Businesses are planning to increase their AI investments significantly, with many intending to spend over $100,000. The survey highlights a positive outlook for AI adoption across various industries, with 73% of businesses either using AI or planning to implement it.", "title": "The State of AI in Operations 2025", "propositions": ["Glide\n\nThe state of AI in operations 2025\n\nIn January 2025, we surveyed over 1,000 managers and senior business leaders to learn about where they are in the process of AI adoption and what impact AI technology is having on their operations.", "]Table of contents\n\nKey takeaways                                                                                                                          3\n\nA snapshot of AI adoption                                                                                                      4\n    Who is using AI                                                                                                                    4\n    Impact: anticipation vs. reality                                                                                            5\n    Investment                                                                                                                           6\n\nThe AI adoption curve                                                                                                              8\n    AI Adopters                                                                                                                           8\n    AI Planners                                                                                                                         10\n    AI Rejectors                                                                                                                        11\n\nAI implementation                                                                                                                  14\n    Motivation                                                                                                                         14\n    Use cases                                                                                                                           15\n    Tools                                                                                                                                16\n    Success                                                                                                                            18\n\nAI agents                                                                                                                               19\n    Who is using AI agents                                                                                                       20\n    How AI agents are being built                                                                                            21\n    Number of AI agents deployed                                                                                           23\n\nChallenges and barriers to AI adoption                                                                                  24\n    Security                                                                                                                           24\n    Lack of knowledge                                                                                                             24\n    Integration                                                                                                                       25\n    AI barriers by industry                                                                                                      25\n    Internal conflicts                                                                                                              26\n    Will AI take our jobs?", "Our January 2025 survey of over 1,000 managers and business leaders found that AI adoption is well underway across business operations.", "We learned who is ahead of the curve and who is struggling to catch up.", "Key Takeaways: AI adoption is underway across businesses, and the outlook is positive\n\nAI adoption rates are high and climbing quickly\n\nOur survey found that 28% of businesses are already using AI, and another 45% have active implementation plans underway.", "Businesses using AI are planning to increase their investment in 2025\n\n34% of businesses planning to use AI plan to spend over $100,000, while 57% of those already actively using AI in their operations plan to spend $100,000 or more.", "## 73% of businesses are already using AI or have active plans to\n\nAlmost three-quarters of businesses either already use AI or have active plans to roll it out.", "Only a small minority of respondents indicate that they have no interest at all in AI implementation.", "### 73% of businesses are using AI or have active implementation plans\n\nA large donut chart displays the breakdown of AI adoption status among businesses:\n\nThe chart shows that 73% of businesses are using AI or have plans to implement it, which is divided into:\n- 45% have AI implemented (shown in dark teal)\n- 28% have active plans to implement AI (shown in medium teal)\n- 19% want to implement AI but don't know how (shown in light gray)\n- 8% have no interest in implementing AI (shown in lighter gray)\n\nThe chart includes a legend identifying each segment with its corresponding percentage and color.", "---\n\nAt the top of the page, four pie charts display demographic information about survey respondents:\n\nBusiness Size: 32% Enterprise (100+), 43% Middle businesses (100-999), 25% Small businesses (10-99)\n\nIndustry: 19% Construction, 19% Manufacturing, 18% Retail, 17% Technology, 26% Other\n\nRole: 45% Manager, 31% Director, 4% VP & C-level, 0% Individual contributor\n\nDepartment: 31% IT, 22% Operations, 15% HR, 8% Customer service & support, 29% Other\n\nBelow this is a section titled \"Participating countries\" showing a horizontal bar chart where the US represents 71% of participants, UK represents 14%, Canada represents 8%, and Australia/New Zealand represents 7%.", "At the bottom, there is a notation: \"Glide: 18% Transportation & Logistics, 18% Other, 18% Admin, 8% Sales, 11% Other\"Based on this data, we categorized survey respondents into 3 groups in order to learn more about where businesses are already providing successful and why other businesses are further behind in their AI adoption.", ":\n\nAI Adopters\nBusinesses already using AI in their operations\n28%\n\nAI Planners\nBusinesses with active plans to implement AI in the near future\n64%\n\nAI Rejectors\nBusinesses who have no plans to implement AI\n8%\n\nWe'll go into detail about each of these groups later.", "Businesses are investing more in AI\n\nBusinesses planning to use AI in 2025 are investing significant resources into it\u2014and for more than the cost of a ChatGPT Pro account.", "39% of businesses are allocating between $10,000 and $99,999 for 2025, with the next largest segment, at 29%, investing between $100,000 and $499,999.43%\n\nof businesses plan to invest at least $100,000 in AI technology in 2025\n\nThe state of AI in operations - 2025\n\nGlide\n\n\nManufacturing, transportation & logistics, retail, and tech are allocating the most budget towards AI, with over 50% of respondents planning to invest over $100,000 in 2025.", "The businesses that have already begun using AI are continuing to increase their investment, allocating significantly more money on average to AI tech than those in the planning stages.", "Businesses already using AI are doubling down on investment in 2025\n\nPercent of businesses planning to spend over $100K on AI tools in 2025\n\nPlanners                                                     Adopters\n34%                                                          57%\n\nBusinesses in the planning stages of AI adoption     Businesses actively using AI in their operations\n\nThe state of AI in operations - 2025\n\nGlideThe AI adoption curve\n\nWe asked questions to learn more about which businesses are already using AI, which are in the active planning phase, and which are choosing not to use AI at all.", "AI Adopters\n\nAI Adopters are the 28% of respondents who report that they are already using AI in their organization.", "We asked them specific questions about where they are using AI, what tools they've tried, and how successful their AI adoption has been in each area.", "Larger businesses report higher levels of AI implementation, with Enterprises using AI at over 2x the rate of small businesses.", "Over the next 5 years, my company aims to integrate AI more deeply into its strategic operations.", "The goal would be to leverage AI to gain a competitive edge, improve innovation, and adapt to changing market demands.AI Planners\n\nAI Planners are the largest group of businesses surveyed.", "45% report they have active plans to implement AI, while 19% report they want to implement AI but don't know how.", "Planners' biggest hope when adopting AI is to drive more efficiency.", "They are less likely to explore custom-built tools and more tailored solutions like AI agents.Early AI adoption is starting with generative AI platforms and existing software vendors\n\nA horizontal bar chart showing adoption methods, listed from highest to lowest:\n\n72% - Generative AI platforms\n64% - AI features integrated within existing platforms\n57% - New AI offerings from existing vendors\n35% - AI-First solutions for specific use cases\n28% - Custom built AI with code\n26% - Custom built AI with no/low code\n\nThe state of AI in operations \u2013 2025\nGlide\n\n\nWhat AI Planners are saying\n\nIt's a new technology so I want to get in early but also cautiously.", "Half of AI rejectors (49%) have no plans to implement AI in the future, and a majority of AI Rejectors said their business hasn't experimented with any AI tools at all.Many of the businesses that opt out of AI haven't tried it and don't plan to\n\n[A donut chart showing 68% never used AI]\n\n[A donut chart showing 49% don't plan to use AI in the foreseeable future]\n\nBusinesses choosing not to use AI\n\nThe state of AI in operations - 2025\n\nSurprisingly, even AI rejectors seem to have an optimistic outlook on AI's ability to give businesses a competitive edge.", "I will wait until it is proven to be reliable.AI implementation: Motivation, use cases, tools, and pathways to success\n\nWe wanted to understand what businesses are hoping to achieve with AI and get a better idea of where it's being used and what tools are being deployed for those tasks.", "Motivation: Why are businesses implementing AI?", "They are also the most price-sensitive when evaluating AI vendors, with 27% valuing cost highest.", "Use Cases: Where are businesses implementing AI?", "Where are businesses using AI for, and how effective are they finding it?", "Tools: How are businesses implementing AI?", "Almost three-quarters of the tools respondents are using are supplied to them by their company.", "Success: What tools are businesses finding most effective?", "The source citation reads \"The state of AI in operations \u2013 2025\" and the Glide logo appears in the bottom right corner.", "While fewer agents are being built from scratch, businesses use more agents when they can develop their own\n\nBusinesses building their own AI agents are also significantly more likely to be using a larger number of agents in their operations.", "\"Study Methodology\n\nThe results in this report are from an online survey of 1,071 respondents conducted from January 16 to 28, 2025.", "Authors\n\nWren Noble\n\nLeading Glide's content, including The Column, Case Studies, and Video Content, Wren's expertise lies in AI, no code technology, business tools, and software marketing.", "]Glide\n\nThe state of AI in operations 2025\n\nIn January 2025, we surveyed over 1,000 managers and senior business leaders to learn about where they are in the process of AI adoption and what impact AI technology is having on their operations.", "Our January 2025 survey of over 1,000 managers and business leaders found that AI adoption is well underway across business operations.", "Key Takeaways: AI adoption is underway across businesses, and the outlook is positive\n\nAI adoption rates are high and climbing quickly\n\nOur survey found that 28% of businesses are already using AI, and another 45% have active implementation plans underway.", "Businesses using AI are planning to increase their investment in 2025\n\n34% of businesses planning to use AI plan to spend over $100,000, while 57% of those already actively using AI in their operations plan to spend $100,000 or more.", "## 73% of businesses are already using AI or have active plans to\n\nAlmost three-quarters of businesses either already use AI or have active plans to roll it out.", "### 73% of businesses are using AI or have active implementation plans\n\nA donut chart showing the breakdown of AI adoption status across businesses displays the following segments:\n\n- Have AI implemented (dark teal): 45%\n- Have active plans to implement AI (medium teal): 28%\n- Want to implement AI but don't know how (light gray): 19%\n- Have no interest in implementing AI (light gray): 8%\n\nThe center of the donut contains text stating \"73% are using AI or have plans to implement\"\n\n---\n\nAt the top of the page are four pie charts displaying demographic information about survey respondents:\n\nBusiness Size: 32% Enterprise (100+), 43% Midsize businesses (100-999), 25% Small businesses (10-99)\n\nIndustry: 19% Construction, 19% Manufacturing, 16% Retail, 17% Technology, 26% Other\n\nRole: 65% Manager, 31% Director, 4% VP & C-level, 0% Individual contributor\n\nDepartment: 31% IT, 22% Operations, 15% HR, 8% Customer service & support, 29% Other\n\n---\n\nParticipating countries section shows:\n71% US, 14% UK, 8% CAD, 7% AUS/NZ\n\nGlide includes 8% Transportation & Logistics, 18% Other, 8% Admin, 8% Sales, 11% OtherBased on this data, we categorized survey respondents into 3 groups in order to learn more about where businesses are already providing successful and why other businesses are further behind in their AI adoption.", ":\n\nAI Adopters\nBusinesses already using AI in their operations\n28%\n\nAI Planners\nBusinesses with active plans to implement AI in the near future\n64%\n\nAI Rejectors\nBusinesses who have no plans to implement AI\n8%\n\nWe'll go into detail about each of these groups later.", "The source is noted as \"The state of AI in operations - 2025\" with the Glide logo visible.", "Businesses are investing more in AI\n\nBusinesses planning to use AI in 2025 are investing significant resources into it\u2014and for more than the cost of a ChatGPT Pro account.", "39% of businesses are allocating between $10,000 and $99,999 for 2025, with the next largest segment, at 29%, investing between $100,000 and $499,999.43%\nof businesses plan to invest at least $100,000 in AI technology in 2025\n\nThe state of AI in operations - 2025\nGlide\n\n\nManufacturing, transportation & logistics, retail, and tech are allocating the most budget towards AI, with over 50% of respondents planning to invest over $100,000 in 2025.", "The businesses that have already begun using AI are continuing to increase their investment, allocating significantly more money on average to AI tech than those in the planning stages.", "Businesses already using AI are doubling down on investment in 2025\n\nPercent of businesses planning to spend over $100K on AI tools in 2025\n\nPlanners\n34%\nBusinesses in the planning stages of AI adoption\n\nAdopters\n57%\nBusinesses actively using AI in their operations\n\nThe state of AI in operations - 2025\nGlideThe AI adoption curve\n\nWe asked questions to learn more about which businesses are already using AI, which are in the active planning phase, and which are choosing not to use AI at all.", "AI Adopters\n\nAI Adopters are the 28% of respondents who report that they are already using AI in their organization.", "47% of software & technology companies report using AI already, with retail, professional services, manufacturing, and transportation and logistics following at between 25-27%.", "Over the next 5 years, my company aims to integrate AI more deeply into its strategic operations.", "45% report they have active plans to implement AI, while 19% report they want to implement AI but don't know how.", "They are less likely to explore custom-built tools and more tailored solutions like AI agents.Early AI adoption is starting with generative AI platforms and existing software vendors\n\nA horizontal bar chart showing adoption methods displays the following data:\n\n72% - Generative AI platforms\n64% - AI Features integrated within existing platforms\n57% - New AI offerings from existing vendors\n35% - AI-First solutions for specific use cases\n28% - Custom built AI with code\n26% - Custom built AI with no/low code\n\nThe state of AI in operations \u2013 2025\n\nWhat AI Planners are saying\n\nIt's a new technology so I want to get in early but also cautiously.", "Motivation: Why are businesses implementing AI?", "Source: The state of AI in operations - 2025, Glide\n\nRevenue remains a steady third-place priority across businesses of all sizes.", "Use Cases: Where are businesses implementing AI?", "Where are businesses using AI for, and how effective are they finding it?", "Tools: How are businesses implementing AI?", "They are typically more customized since they need to work with the unique needs of the businesses deploying them.47% of businesses that have implemented AI are already using AI agents\n\n94% of businesses that have adopted AI are also using AI agents or planning to\n\n[A donut chart showing the breakdown of AI agent adoption among businesses that have implemented AI.", "The vast majority of businesses using AI are also either already using AI agents (47%) or have plans to (47%).", "Enterprise organizations are also using a larger number of AI agents, with 26% having 11+ agents deployed compared to 3% of small businesses and 9% of midsized businesses.", "\"Study Methodology\n\nThe results in this report are from an online survey of 1,071 respondents conducted from January 16 to 28, 2025."]}

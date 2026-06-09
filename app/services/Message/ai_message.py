@@ -20,6 +20,9 @@ from pdf2image import convert_from_path
 from dotenv import load_dotenv
 from langchain_classic.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
+from langchain_aws.retrievers import AmazonKnowledgeBasesRetriever
+import boto3
+from botocore.client import Config
 
 load_dotenv()
 
@@ -52,6 +55,29 @@ class AIMessageService:
         #     search_type="mmr",
         #     search_kwargs={"k": 5,"fetch_k": 20, "lambda_mult": 0.7},            
         # )
+        bedrock_config = Config(
+            connect_timeout=120,
+            read_timeout=120,
+            retries={"max_attempts": 3}
+        )        
+        # bedrock-agent-runtime is what the retriever uses to call your KB
+        bedrock_agent_client = boto3.client(
+            "bedrock-agent-runtime",
+            region_name="ap-southeast-1",
+            config=bedrock_config
+        )
+        # --- Retriever pointing directly at your Bedrock Knowledge Base ---
+        self.aws_bedrock_retriever = AmazonKnowledgeBasesRetriever(
+            knowledge_base_id="KJRW6GFIPJ",        # from AWS Bedrock console
+            client=bedrock_agent_client,           # explicit client
+            retrieval_config={
+                "vectorSearchConfiguration": {
+                    "numberOfResults": 5,
+                    "overrideSearchType": "SEMANTIC"   # or HYBRID
+                }
+            },
+        )
+
         self.rag_chain = self._build_chain()
         self.with_history = self._init_runnable_message_history()
 
@@ -60,7 +86,7 @@ class AIMessageService:
         qa_system_prompt = PromptTemplate().getQASystemPrompt()
         contextualize_prompt = PromptTemplate().getContextualizePrompt()
         history_aware_retriever = create_history_aware_retriever(self.model, 
-                                                                 self.retriever, 
+                                                                 self.aws_bedrock_retriever, 
                                                                  contextualize_prompt)
         question_answer_chain = create_stuff_documents_chain(self.model, qa_system_prompt)
         return create_retrieval_chain(history_aware_retriever, question_answer_chain)
@@ -111,11 +137,25 @@ class AIMessageService:
             "sources": [doc.metadata for doc in docs]
         }
 
-        # return self.with_history.invoke(
-        #     {"input": human_message},
-        #     config=config
-        # )
     
+    def make_title(self, conversation_id, human_message):
+        
+        config = {"configurable": {"session_id": conversation_id}}
+        prompt = PromptTemplate().createTitleSummaryPrompt()
+        history_aware_retriever = create_history_aware_retriever(self.model, 
+                                                                 self.retriever, 
+                                                                 prompt)
+
+
+        question_answer_chain = create_stuff_documents_chain(self.model, prompt)
+
+        rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)           
+        
+        response = rag_chain.invoke({"input": human_message},config)
+        response["answer"]
+
+        return response["answer"]   
+
     def retrieve_relevant_docs(self,question):
 
         docs = self.retriever.invoke(question)
@@ -123,20 +163,7 @@ class AIMessageService:
         if not docs:
             return []
 
-        return docs        
-
-        # SIMILARITY_THRESHOLD = 0.50
-        
-        # docs_and_scores = self.vector_store.similarity_search_with_score(question, k=5)
-
-        # print(f"DOCS AND SCORE: {docs_and_scores}")
-
-        # filtered_docs = [
-        #     doc for doc, score in docs_and_scores
-        #     if score < SIMILARITY_THRESHOLD
-        # ]
-
-        # return filtered_docs
+        return docs
 
     def parse_document(self, image_path):
 
@@ -171,11 +198,8 @@ class AIMessageService:
 
 
                 image_b64 = base64.b64encode(buffer.getvalue()).decode()
-
                 response = self._invoke_bedrock_image(image_b64,"image/png")
-
                 print(f"RESPONSE: {response.content}")
-
                 results.append(response.content)
         else:
             raise ValueError(f"Unsupported file type: {mime_type}")

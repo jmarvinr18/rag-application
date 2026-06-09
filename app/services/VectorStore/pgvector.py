@@ -14,9 +14,7 @@ class PGVectorService:
 
         # ✅ Raw SQL engine (NEW)
         self.sql_engine = create_engine(self.connection)
-
         self.embeddings = EmbeddingService().get_hf_embeddings()
-
         self.store = self._init_vector_store()
 
         # create index safely
