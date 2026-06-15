@@ -1,0 +1,19 @@
+# Build context hygiene — keep images small and free of stray data files.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Don't bake sample documents into the image.
+*.pdf
+*.docx
+
+# VCS / editor / CI noise
+.git/
+.gitignore
+.dockerignore
+Dockerfile
+README*
+.vscode/
+.idea/
